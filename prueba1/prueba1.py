@@ -2,28 +2,7 @@ import reflex as rx
 import os
 import dotenv
 from supabase import create_client, Client
-import time
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
-import subprocess
 
-class MyHandler(FileSystemEventHandler):
-    def on_modified(self, event):
-        print(f'File {event.src_path} has been modified')
-        subprocess.run(['powershell.exe', '.\\remote_build.sh'], shell=True)
-
-
-if __name__ == "_main_":
-    event_handler = MyHandler()
-    observer = Observer()
-    observer.schedule(event_handler, path='.', recursive=True)
-    observer.start()
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
 
 class Horarios(rx.Base):
     id = int
@@ -137,6 +116,8 @@ def button_green(text, click, id) -> rx.Component:
         on_click=click,
         color_scheme=color.color_green
     )
+
+
 
 def button_red(text, id) -> rx.Component:
     return rx.center(rx.button(
