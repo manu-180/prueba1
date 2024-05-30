@@ -8,3 +8,6 @@ mkdir public
 Expand-Archive -Path frontend.zip -DestinationPath public
 Remove-Item -Force frontend.zip
 deactivate
+git add .
+git commit -m "cambios"
+git push
